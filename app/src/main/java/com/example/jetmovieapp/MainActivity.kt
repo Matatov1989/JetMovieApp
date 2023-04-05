@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -36,46 +37,60 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(content: @Composable () -> Unit) {
     JetMovieAppTheme {
-    //    content()
-        Scaffold(topBar = {
-            TopAppBar(
-                backgroundColor = Color.Magenta,
-                elevation = 5.dp) {
+        //    content()
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    backgroundColor = Color.Magenta,
+                    elevation = 5.dp
+                ) {
                     Text(text = "Movies")
                 }
-        },) {
+            },
+        ) {
             content()
         }
     }
 }
 
 @Composable
-fun MainContent(movieList: List<String> = listOf(
-    "Avatar", "300", "Harry Potter", "Be Happy", "Life", "Cross"
-)) {
+fun MainContent(
+    movieList: List<String> = listOf(
+        "Avatar", "300", "Harry Potter", "Be Happy", "Life", "Cross"
+    )
+) {
     Column(modifier = Modifier.padding(12.dp)) {
-        LazyColumn(){
+        LazyColumn() {
             items(items = movieList) {
-                MovieRow(movie = it)
+                MovieRow(movie = it) { movie ->
+
+                }
             }
         }
     }
 }
 
 @Composable
-fun MovieRow(movie: String) {
-    Card(modifier = Modifier
-        .padding(4.dp)
-        .fillMaxWidth()
-        .height(130.dp),
+fun MovieRow(movie: String, onItemClick: (String) -> Unit = {}) {
+    Card(
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth()
+            .height(130.dp)
+            .clickable {
+                       onItemClick(movie)
+            },
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         elevation = 6.dp
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start) {
-            Surface(modifier = Modifier
-                .padding(12.dp)
-                .size(100.dp),
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Surface(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .size(100.dp),
                 shape = RectangleShape,
                 elevation = 4.dp
             ) {
@@ -91,7 +106,7 @@ fun MovieRow(movie: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-   MyApp {
-       MainContent()
-   }
+    MyApp {
+        MainContent()
+    }
 }
