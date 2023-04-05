@@ -78,7 +78,7 @@ fun MovieRow(movie: String, onItemClick: (String) -> Unit = {}) {
             .fillMaxWidth()
             .height(130.dp)
             .clickable {
-                       onItemClick(movie)
+                onItemClick(movie)
             },
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         elevation = 6.dp
