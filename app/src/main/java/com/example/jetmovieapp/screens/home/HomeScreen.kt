@@ -22,7 +22,7 @@ fun HomeScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                backgroundColor = Color.Magenta,
+                backgroundColor = Color.LightGray,
                 elevation = 5.dp
             ) {
                 Text(text = "Movies")
