@@ -13,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.jetmovieapp.MovieRow
+import com.example.jetmovieapp.model.Movie
+import com.example.jetmovieapp.model.getMovies
 import com.example.jetmovieapp.navigation.MovieScreens
+import com.example.jetmovieapp.widgets.MovieRow
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -36,9 +38,7 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun MainContent(
     navController: NavController,
-    movieList: List<String> = listOf(
-        "Avatar", "300", "Harry Potter", "Be Happy", "Life", "Cross"
-    )
+    movieList: List<Movie> = getMovies()
 ) {
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn() {
